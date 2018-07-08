@@ -1,9 +1,11 @@
+from peewee import *
+
 # TODO make this pg if not local
-database = SqliteDatabase(DATABASE)
+db = SqliteDatabase('rapid-notifications')
 
 class BaseModel(Model):
     class Meta:
-        database = database
+        database = db 
 
 class Group(BaseModel):
     id = UUIDField()
