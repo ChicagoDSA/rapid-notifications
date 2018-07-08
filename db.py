@@ -5,15 +5,32 @@ db = SqliteDatabase('rapid-notifications')
 
 class BaseModel(Model):
     class Meta:
-        database = db 
+        database = db
 
 class Group(BaseModel):
-    id = UUIDField()
     name = CharField(unique=True)
 
 class Member(BaseModel):
-    id = UUIDField()
     phone_number = CharField(unique=True)
 
+class GroupMemberShip(BaseModel):
+    group = ForeignKeyField(Group, backref='group')
+    member = ForeignKeyField(Member, backref='member')
+    class Meta:
+        indexes = (
+                # Specify a unique multi-column index on from/to-user.
+                (('group', 'member'), True),
+            )
+
 db.connect()
-db.create_tables([Group, Member])
+db.create_tables([Group, Member, GroupMemberShip])
+
+## example usage ##
+# dummy_member = Member(phone_number="1234567890")
+# dummy_member.save()
+#
+# dummy_group = Group(name="tech working group")
+# dummy_group.save()
+#
+# dummy_membership = GroupMemberShip(group=dummy_group.id, member=dummy_member.id)
+# dummy_membership.save()
