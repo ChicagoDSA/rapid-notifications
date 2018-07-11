@@ -1,6 +1,10 @@
-from flask import Flask
-app = Flask(__name__)
+from app import app
+from models import *
 
-@app.route("/")
-def hello():
-    return "Hello World!"
+import api
+
+if __name__ == "__main__":
+    Group.create_table(True)
+    Member.create_table(True)
+    app.run()
+

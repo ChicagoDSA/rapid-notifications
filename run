@@ -1,2 +1,2 @@
 #!/bin/bash
-FLASK_APP=main.py flask run
+pythpn main.py
