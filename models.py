@@ -1,7 +1,6 @@
 from peewee import *
+from app import db
 
-# TODO make this pg if not local
-db = SqliteDatabase('rapid-notifications')
 
 class BaseModel(Model):
     class Meta:
@@ -21,9 +20,6 @@ class GroupMemberShip(BaseModel):
                 # Specify a unique multi-column index on from/to-user.
                 (('group', 'member'), True),
             )
-
-db.connect()
-db.create_tables([Group, Member, GroupMemberShip])
 
 ## example usage ##
 # dummy_member = Member(phone_number="1234567890")
