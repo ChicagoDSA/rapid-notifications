@@ -21,6 +21,35 @@ class GroupMemberShip(BaseModel):
                 (('group', 'member'), True),
             )
 
+
+# TODO: this might make more sense to put in a different file
+# helpers
+def addGroup(name):
+    group = Group(name=name)
+    group.save()
+    return group.id
+
+def addMember(number):
+    member = Member(phone_number=number)
+    member.save()
+    return member.id
+
+def getAllGroups():
+    groups = []
+    for group in Group.select():
+        group = {"group_name": group.name, "group_id": group.id}
+        groups.append(group)
+
+    return groups
+
+def getAllMembers():
+    members = []
+    for member in Member.select():
+        member = {"number": member.phone_number, "member_id": member.id}
+        members.append(member)
+
+    return members
+
 ## example usage ##
 # dummy_member = Member(phone_number="1234567890")
 # dummy_member.save()

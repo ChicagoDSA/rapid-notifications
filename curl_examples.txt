@@ -1,0 +1,16 @@
+example curl commands for dirty testing
+
+GROUPS
+POST
+curl -H "Content-Type: application/json" localhost:5000/groups -d '{"group": "coms5"}'
+
+GET
+curl -H "Content-Type: application/json" localhost:5000/groups
+
+
+MEMBERS
+POST
+curl -H "Content-Type: application/json" localhost:5000/members -d '{"number": "+17731234567"}'
+
+GET
+curl -H "Content-Type: application/json" localhost:5000/members

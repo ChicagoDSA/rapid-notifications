@@ -4,8 +4,12 @@ group_schema = Schema({
     "group": And(str)
     })
 
+member_schema = Schema({
+    "number": And(str, Use(str), lambda s: len(s) == 12)
+    })
+
 members_schema = Schema({
-    "numbers": [And(str, Use(str), lambda s: len(s) == 9)]
+    "numbers": [And(str, Use(str), lambda s: len(s) == 12)]
     })
 
 message_schema = Schema({
