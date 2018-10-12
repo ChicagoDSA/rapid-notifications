@@ -29,10 +29,14 @@ def addGroup(name):
     group.save()
     return group.id
 
-def addMember(number):
-    member = Member(phone_number=number)
-    member.save()
-    return member.id
+def updateGroup(_id, name):
+    q = Group.update({Group.name: name}).where(Group.id == _id)
+    rows = q.execute()
+    return rows
+
+def deleteGroup(_id):
+    q = Group.delete().where(Group.id == _id)
+    return q.execute()
 
 def getAllGroups():
     groups = []
@@ -42,6 +46,20 @@ def getAllGroups():
 
     return groups
 
+def addMember(number):
+    member = Member(phone_number=number)
+    member.save()
+    return member.id
+
+def updateMember(_id, number):
+    q = Member.update({Member.phone_number: number}).where(Member.id == _id)
+    rows = q.execute()
+    return rows
+
+def deleteMember(_id):
+    q = Member.delete().where(Member.id == _id)
+    return q.execute()
+
 def getAllMembers():
     members = []
     for member in Member.select():
@@ -49,6 +67,15 @@ def getAllMembers():
         members.append(member)
 
     return members
+
+def addMemberToGroup(member_id, group_id):
+    gms = GroupMemberShip(group = group_id, member = member_id)
+    gms.save()
+    return gms.id
+
+def removeMemberFromGroup(member_id, group_id):
+    gms = GroupMemberShip.delete().where(Group.id == group_id, Member.id == member_id)
+    return gms.execute()
 
 ## example usage ##
 # dummy_member = Member(phone_number="1234567890")

@@ -7,6 +7,13 @@ curl -H "Content-Type: application/json" localhost:5000/groups -d '{"group": "co
 GET
 curl -H "Content-Type: application/json" localhost:5000/groups
 
+DELETE
+curl -X DELETE localhost:5000/groups/<id>
+
+PUT
+curl -X PUT -H "Content-Type: application/json" -d '{"group":"new_name"}' localhost:5000/groups/<id>
+
+
 
 MEMBERS
 POST
@@ -14,3 +21,16 @@ curl -H "Content-Type: application/json" localhost:5000/members -d '{"number": "
 
 GET
 curl -H "Content-Type: application/json" localhost:5000/members
+
+DELETE
+curl -X DELETE localhost:5000/members/<id>
+
+PUT
+curl -X PUT -H "Content-Type: application/json" -d '{"number": "+00000000000"}' localhost:5000/members/<id>
+
+
+MEMBERSHIP
+
+PUT
+curl -H "Content-Type: application/json" localhost:5000/groups/<id> -d '{"member_id": <id>}'
+
